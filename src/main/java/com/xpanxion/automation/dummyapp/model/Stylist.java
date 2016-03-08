@@ -5,22 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "APP_STYLIST")
-@NamedNativeQueries({
-        @NamedNativeQuery(
-                name = "allStylists",
-                query = "SELECT * FROM APP_STYLIST",
-                resultClass = Stylist.class),
-        @NamedNativeQuery(
-                name = "stylistbySalon",
-                query = "SELECT * FROM APP_STYLIST WHERE Salon_ID = :salon",
-                resultClass = Stylist.class)
-})
 public class Stylist implements Serializable{
 	
     /** Distinguish between different versions of this serialized class. */

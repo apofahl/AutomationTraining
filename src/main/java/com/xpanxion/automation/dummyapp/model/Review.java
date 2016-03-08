@@ -6,23 +6,11 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "APP_REVIEW")
-@NamedNativeQueries({
-        @NamedNativeQuery(
-                name = "allReviews",
-                query = "",
-                resultClass = Review.class),
-        @NamedNativeQuery(
-                name = "reviewsbyStylist",
-                query = "",
-                resultClass = Review.class)
-})
 public class Review implements Serializable{
 	
     /** Distinguish between different versions of this serialized class. */

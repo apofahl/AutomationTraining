@@ -5,26 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "APP_CLIENT")
-@NamedNativeQueries({
-        @NamedNativeQuery(
-                name = "allClients",
-                query = "",
-                resultClass = Client.class),
-        @NamedNativeQuery(
-                name = "clientsForStylist",
-                query = "",
-                resultClass = Client.class)
-//        @NamedNativeQuery(
-//                name = "clientsForSalon",
-//                query = "",
-//                resultClass = Client.class)
-})
 public class Client implements Serializable{
 	
     /** Distinguish between different versions of this serialized class. */

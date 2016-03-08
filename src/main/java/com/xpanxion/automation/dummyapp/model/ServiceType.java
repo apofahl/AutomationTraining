@@ -5,26 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "APP_SERVICETYPE")
-@NamedNativeQueries({
-        @NamedNativeQuery(
-                name = "allServiceTypes",
-                query = "",
-                resultClass = ServiceType.class)
-//        @NamedNativeQuery(
-//                name = "servicesByStylist",
-//                query = "",
-//                resultClass = ServiceType.class),
-//        @NamedNativeQuery(
-//                name = "servicesBySalon",
-//                query = "",
-//                resultClass = ServiceType.class)
-})
 public class ServiceType implements Serializable{
 	
     /** Distinguish between different versions of this serialized class. */

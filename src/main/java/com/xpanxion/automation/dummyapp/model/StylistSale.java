@@ -6,22 +6,10 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "APP_SALE")
-@NamedNativeQueries({
-        @NamedNativeQuery(
-                name = "salesForStylists",
-                query = "",
-                resultClass = StylistSale.class),
-        @NamedNativeQuery(
-                name = "salesByStylist",
-                query = "",
-                resultClass = StylistSale.class)
-})
 public class StylistSale implements Serializable{
 	
     /** Distinguish between different versions of this serialized class. */

@@ -5,17 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.xpanxion.automation.dummyapp.services.StylistService;
+import com.xpanxion.automation.dummyapp.repository.StylistRepository;
 
 @Controller
 public class HomeController {
 	
-	private StylistService stylistService;
-	
 	@Autowired
-	public HomeController(StylistService styleServ) {
-		stylistService = styleServ;
-	}
+	private StylistRepository stylistRepo;
 
 //    @RequestMapping("/")
 //    public String greeting(@RequestParam(value="username", required=true) String username, @RequestParam(value="password", required=true) String password, Model model) {
@@ -24,7 +20,7 @@ public class HomeController {
     
     @RequestMapping("/")
     public String greeting(Model model) {
-    	model.addAttribute("stylistList", stylistService.getAllStylists());
+//    	model.addAttribute("stylistList", stylistRepo.findAll());
         return "greeting";
     }
 	

@@ -7,22 +7,10 @@ import java.sql.Time;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "APP_APPOINTMENT")
-@NamedNativeQueries({
-        @NamedNativeQuery(
-                name = "allAppointments",
-                query = "SELECT * FROM APP_APPOINTMENT",
-                resultClass = Appointment.class),
-        @NamedNativeQuery(
-                name = "appointmentByStylist",
-                query = "SELECT * FROM APP_APPOINTMENT WHERE Stylist_ID = :stylist",
-                resultClass = Appointment.class)
-})
 public class Appointment implements Serializable{
 	
     /** Distinguish between different versions of this serialized class. */

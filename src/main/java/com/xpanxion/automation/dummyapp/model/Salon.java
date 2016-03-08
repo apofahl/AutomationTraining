@@ -5,18 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "APP_SALON")
-@NamedNativeQueries({
-        @NamedNativeQuery(
-                name = "allSalons",
-                query = "",
-                resultClass = Salon.class)
-})
 public class Salon implements Serializable{
 	
     /** Distinguish between different versions of this serialized class. */
