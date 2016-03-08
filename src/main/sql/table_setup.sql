@@ -68,7 +68,7 @@ INSERT INTO APP_SERVICETYPE (Description) VALUES
 ("Men's Cut"),
 ("Color"),
 ("Women's Cut"),
-("Maicure"),
+("Manicure"),
 ("Nose Wax");
 
 CREATE TABLE IF NOT EXISTS APP_SERVICE (

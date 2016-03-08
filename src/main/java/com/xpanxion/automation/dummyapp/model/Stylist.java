@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,9 +28,10 @@ public class Stylist implements Serializable{
 	@Column(name= "Stylist_Email")
 	private String email;
 	@Column(name= "Cash_Only")
-	private boolean cashOnly;
-	@Column(name= "Salon_ID")
-	private String salonId;
+	private Boolean cashOnly;
+	@ManyToOne(optional=true)
+    @JoinColumn(name="Salon_ID",referencedColumnName="Salon_LicNum")
+	private Salon salon;
 	
 	public String getLicNum() {
 		return licNum;
@@ -78,12 +81,12 @@ public class Stylist implements Serializable{
 		this.cashOnly = cashOnly;
 	}
 	
-	public String getSalonId() {
-		return salonId;
+	public Salon getSalon() {
+		return salon;
 	}
 	
-	public void setSalonId(String salonId) {
-		this.salonId = salonId;
+	public void setSalonId(Salon salon) {
+		this.salon = salon;
 	}
 
 }
