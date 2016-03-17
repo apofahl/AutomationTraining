@@ -6,6 +6,8 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -19,10 +21,12 @@ public class Review implements Serializable{
 	@Id
 	@Column(name= "Review_ID", nullable = false)
 	private String id;
-	@Column(name= "Client_ID", nullable = false)
-	private String clientId;
-	@Column(name= "Stylist_ID", nullable = false)
-	private String stylistId;
+	@ManyToOne(optional=false)
+    @JoinColumn(name="Client_ID",referencedColumnName="Client_ID")
+	private Client client;
+	@ManyToOne(optional=false)
+    @JoinColumn(name="Stylist_ID",referencedColumnName="Stylist_LicNum")
+	private Stylist stylist;
 	@Column(name= "Review_Date", nullable = false)
 	private Date date;
 	@Column(name= "Review_Rate", nullable = false)
@@ -38,20 +42,20 @@ public class Review implements Serializable{
 		this.id = id;
 	}
 	
-	public String getClientId() {
-		return clientId;
+	public Client getClient() {
+		return client;
 	}
 	
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
+	public void setClientId(Client client) {
+		this.client = client;
 	}
 	
-	public String getStylistId() {
-		return stylistId;
+	public Stylist getStylist() {
+		return stylist;
 	}
 	
-	public void setStylistId(String stylistId) {
-		this.stylistId = stylistId;
+	public void setStylistId(Stylist stylist) {
+		this.stylist = stylist;
 	}
 	
 	public Date getDate() {

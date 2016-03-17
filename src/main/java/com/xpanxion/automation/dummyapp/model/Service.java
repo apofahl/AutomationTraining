@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,30 +17,32 @@ public class Service implements Serializable{
     private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name= "Service_Type", nullable = false)
-	private int serviceType;
+	@ManyToOne(optional=false)
+    @JoinColumn(name="Service_Type",referencedColumnName="Type_ID")
+	private ServiceType serviceType;
 	@Id
-	@Column(name= "Stylist_ID", nullable = false)
-	private String stylistId;
+	@ManyToOne(optional=false)
+    @JoinColumn(name="Stylist_ID",referencedColumnName="Stylist_LicNum")
+	private Stylist stylist;
 	@Column(name= "Service_Price", nullable = false)
 	private double price;
 	@Column(name= "Service_Time", nullable = false)
 	private int time;
 	
-	public int getServiceType() {
+	public ServiceType getServiceType() {
 		return serviceType;
 	}
 	
-	public void setServiceType(int serviceType) {
+	public void setServiceType(ServiceType serviceType) {
 		this.serviceType = serviceType;
 	}
 	
-	public String getStylistId() {
-		return stylistId;
+	public Stylist getStylist() {
+		return stylist;
 	}
 	
-	public void setStylistId(String stylistId) {
-		this.stylistId = stylistId;
+	public void setStylistId(Stylist stylist) {
+		this.stylist = stylist;
 	}
 	
 	public double getPrice() {

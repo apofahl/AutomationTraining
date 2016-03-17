@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../css/styles.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<header>
+		<h1 class="heading">StyleFinder</h1>
+		<nav>
+			<ul>
+				<li id="home" class="tab"><a href="">Home</a></li>
+				<li id="stylists" class="tab"><a href="">Stylists</a></li>
+				<li id="salons" class="tab"><a href="">Salons</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<div th:each="stylist : ${stylistList}">
+			<h3 th:text="${stylist.firstName} +' '+ ${stylist.lastName}"></h3>
+		</div>
+		<div th:each="service : ${serviceList}">
+			<p th:text="${service.description}"></p>
+		</div>
+	</main>
+	<footer>
+		<p>Created for internal training at Xpanxion</p>
+	</footer>
+</body>
+</html>

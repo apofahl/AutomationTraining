@@ -17,6 +17,22 @@
 			</ul>
 		</nav>
 	</header>
+	<main>
+		<div th:each="stylist : ${stylistList}">
+			<img src="../images/MK3_9926.jpg"></img>
+			<p th:text="${stylist.firstName} +' '+ ${stylist.lastName}"></p>
+			<p th:text="${stylist.email}"></p>
+			<div th:switch="${stylist.salon}">
+				<p th:case="null"></p>
+				<p th:case="*" th:text="${stylist.salon.name}"></p>
+			</div>
+		</div>
+		<div th:each="salon : ${salonList}">
+			<img src="../images/MK3_9926.jpg"></img>
+			<p th:text="${salon.name}"></p>
+<!-- 			<p th:text="${salon.services}"></p> -->
+		</div>
+	</main>
 	<footer>
 		<p>Created for internal training at Xpanxion</p>
 	</footer>

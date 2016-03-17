@@ -1,12 +1,15 @@
 package com.xpanxion.automation.dummyapp.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,11 +30,15 @@ public class Stylist implements Serializable{
 	private String phone;
 	@Column(name= "Stylist_Email")
 	private String email;
+	@Column(name= "Stylist_About")
+	private String about;
 	@Column(name= "Cash_Only")
 	private Boolean cashOnly;
 	@ManyToOne(optional=true)
     @JoinColumn(name="Salon_ID",referencedColumnName="Salon_LicNum")
 	private Salon salon;
+	@OneToMany(mappedBy="stylist", targetEntity=Review.class, fetch=FetchType.LAZY)
+	private List<Review> reviews;
 	
 	public String getLicNum() {
 		return licNum;
@@ -73,6 +80,14 @@ public class Stylist implements Serializable{
 		this.email = email;
 	}
 	
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
 	public boolean isCashOnly() {
 		return cashOnly;
 	}
@@ -87,6 +102,10 @@ public class Stylist implements Serializable{
 	
 	public void setSalonId(Salon salon) {
 		this.salon = salon;
+	}
+	
+	public List<Review> getReviews() {
+		return reviews;
 	}
 
 }

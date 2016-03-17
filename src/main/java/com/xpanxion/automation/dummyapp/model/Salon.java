@@ -1,10 +1,13 @@
 package com.xpanxion.automation.dummyapp.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +32,8 @@ public class Salon implements Serializable{
 	private String state;
 	@Column(name= "Salon_Zip", nullable = false)
 	private String zip;
+	@OneToMany(mappedBy="salon", targetEntity=Stylist.class, fetch=FetchType.LAZY)
+	private List<Stylist> stylists;
 	
 	
 	public String getLicNum() {
@@ -86,5 +91,8 @@ public class Salon implements Serializable{
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-
+	
+	public List<Stylist> getStylists() {
+		return stylists;
+	}
 }

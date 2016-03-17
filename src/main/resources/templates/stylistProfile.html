@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../css/styles.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<header>
+		<h1 class="heading">StyleFinder</h1>
+		<nav>
+			<ul>
+				<li id="home" class="tab"><a href="">Home</a></li>
+				<li id="stylists" class="tab"><a href="">Stylists</a></li>
+				<li id="salons" class="tab"><a href="">Salons</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<h3 th:text="${stylist.firstName} +' '+ ${stylist.lastName}"></h3>
+		<div th:switch="${stylist.about}">
+			<p th:case="null"></p>
+			<p th:case="*" th:text="${stylist.about}"></p>
+		</div>
+		<div th:switch="${stylist.salon}">
+			<p th:case="null"></p>
+			<p th:case="*" th:text="${stylist.salon.name}"></p>
+		</div>
+		<table>
+		    <thead>
+		      <tr>
+		        <th>Service</th>
+		        <th>Price</th>
+		        <th>Time</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr th:each="service : ${serviceList}">
+		        <td th:text="${service.serviceType.description}"></td>
+		        <td>$<span th:text="${#numbers.formatDecimal(service.price, 0, 'DEFAULT', 2, 'DEFAULT')}"></span></td>
+		        <td th:text="${service.time}"></td>
+		      </tr>
+		    </tbody>
+	    </table>
+	    
+	    <div th:each="review : ${reviewList}">
+	    	<h3 th:text="${review.review}"></h3>
+	    	<h5 th:text="${review.date}"></h5>
+			<div th:switch="${review.note}">
+				<p th:case="null"></p>
+				<p th:case="*" th:text="${review.note}"></p>
+			</div>
+			<h5 th:text="${review.client.firstName}"></h5>
+	    </div>
+		
+		<button name="contact" type="submit">Contact Me</button>
+		<button name="addStylist" type="submit">Make My Stylist</button>
+	</main>
+	<footer>
+		<p>Created for internal training at Xpanxion</p>
+	</footer>
+	
+	<script>
+		
+	</script>
+</body>
+</html>
