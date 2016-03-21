@@ -3,9 +3,11 @@ package com.xpanxion.automation.dummyapp.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xpanxion.automation.dummyapp.model.Review;
 import com.xpanxion.automation.dummyapp.model.Salon;
@@ -45,15 +47,15 @@ public class ClientController {
     	Salon salon = salonRepo.findByLicNum("73C6204JW");
     	List<Stylist> list = salon.getStylists();
     	List<ServiceType> serviceList = salonRepo.findServiceTypesBySalon(salon);
-    	model.addAttribute("stylistList", list);
+    	model.addAttribute("salon", salon);
     	model.addAttribute("serviceList", serviceList);
         return "salonProfile";
     }
     
-    @RequestMapping("/stylist")
-    public String stylistProfile(Model model) {
+    @RequestMapping("/stylists/{stylistId}")
+    public String stylistProfile(@RequestParam String stylistId, Model model) {
 //    	Stylist stylist = stylistRepo.findByLicNum("120938");
-    	Stylist stylist = stylistRepo.findByLicNum("109283");
+    	Stylist stylist = stylistRepo.findByLicNum(stylistId);
     	List<Service> serviceList = stylistRepo.findServices(stylist);
     	List<Review> reviewList = stylist.getReviews();
     	model.addAttribute("stylist", stylist);
@@ -62,9 +64,9 @@ public class ClientController {
         return "stylistProfile";
     }
 	
-//  @RequestMapping("/")
-//  public String greeting(Model model) {
-//      return "greeting";
-//  }
+	@RequestMapping("/search")
+	public String search(Model model) {
+		return "search";
+	}
 
 }

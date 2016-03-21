@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
 import com.xpanxion.automation.dummyapp.model.Service;
-import com.xpanxion.automation.dummyapp.model.ServiceType;
 import com.xpanxion.automation.dummyapp.model.Stylist;
 
 public interface StylistRepository extends Repository<Stylist, String> {

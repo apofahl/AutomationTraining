@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home</title>
+    <title>StyleFinder : Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="../css/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
 	<header>
 		<h1 class="heading">StyleFinder</h1>
 		<nav>
 			<ul>
-				<li id="home" class="tab"><a href="">Home</a></li>
+				<li id="home" class="tab"><a href="#" th:href="@{/}">Home</a></li>
 				<li id="stylists" class="tab"><a href="">Stylists</a></li>
 				<li id="salons" class="tab"><a href="">Salons</a></li>
 				<li id="signIn" class="tab"><a href="">Sign In/Join</a></li>
@@ -19,8 +19,8 @@
 	</header>
 	<main>
 		<div th:each="stylist : ${stylistList}">
-			<img src="../images/MK3_9926.jpg"></img>
-			<p th:text="${stylist.firstName} +' '+ ${stylist.lastName}"></p>
+			<img src="../images/MK3_9926.jpg" th:src="@{/images/MK3_9926.jpg}"></img>
+			<p th:text="${stylist.firstName} +' '+ ${stylist.lastName}" th:onclick="'alert(\'' + ${stylist.firstName} + '\');'"></p>
 			<p th:text="${stylist.email}"></p>
 			<div th:switch="${stylist.salon}">
 				<p th:case="null"></p>

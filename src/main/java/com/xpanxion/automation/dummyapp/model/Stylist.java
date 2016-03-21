@@ -39,6 +39,8 @@ public class Stylist implements Serializable{
 	private Salon salon;
 	@OneToMany(mappedBy="stylist", targetEntity=Review.class, fetch=FetchType.LAZY)
 	private List<Review> reviews;
+	@OneToMany(mappedBy="stylist", targetEntity=Service.class, fetch=FetchType.LAZY)
+	private List<Service> services;
 	
 	public String getLicNum() {
 		return licNum;
@@ -106,6 +108,10 @@ public class Stylist implements Serializable{
 	
 	public List<Review> getReviews() {
 		return reviews;
+	}
+	
+	public List<Service> getServices() {
+		return services;
 	}
 
 }

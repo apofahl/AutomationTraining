@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home</title>
+    <title th:text="'StyleFinder : '+ ${stylist.firstName} +' '+ ${stylist.lastName}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="../css/styles.css" type="text/css" rel="stylesheet"/>
 </head>
@@ -10,7 +10,7 @@
 		<h1 class="heading">StyleFinder</h1>
 		<nav>
 			<ul>
-				<li id="home" class="tab"><a href="">Home</a></li>
+				<li id="home" class="tab"><a href="#" th:href="@{/}">Home</a></li>
 				<li id="stylists" class="tab"><a href="">Stylists</a></li>
 				<li id="salons" class="tab"><a href="">Salons</a></li>
 			</ul>
@@ -35,7 +35,7 @@
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr th:each="service : ${serviceList}">
+		      <tr th:each="service : ${stylist.services}">
 		        <td th:text="${service.serviceType.description}"></td>
 		        <td>$<span th:text="${#numbers.formatDecimal(service.price, 0, 'DEFAULT', 2, 'DEFAULT')}"></span></td>
 		        <td th:text="${service.time}"></td>
