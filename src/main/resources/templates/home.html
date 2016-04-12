@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>StyleFinder : Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+	<header>
+		<h1 class="heading">StyleFinder</h1>
+		<nav>
+			<ul>
+				<li id="home" class="tab"><a href="#" th:href="@{/}">Home</a></li>
+				<li id="stylists" class="tab"><a href="">Stylists</a></li>
+				<li id="salons" class="tab"><a href="">Salons</a></li>
+				<li id="signIn" class="tab"><a href="#" th:href="@{/login}">Sign In/Join</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<div th:each="stylist : ${stylistList}">
+			<img th:src="@{/images/example.jpg}"></img>
+			<a href="#" th:href="@{'/stylists/' + ${stylist.licNum}}" th:text="${stylist.firstName} +' '+ ${stylist.lastName}"></a>
+			<div th:switch="${stylist.zip != null}">
+				<p th:case="true" th:text="${stylist.zip}"></p>
+				<p th:case="false" th:text="${stylist.salon.zip}"></p>
+			</div>
+			<div th:if="${stylist.salon != null}">
+				<p th:text="${stylist.salon.name}"></p>
+			</div>
+		</div>
+		<div th:each="salon : ${salonList}">
+			<img th:src="@{/images/example.jpg}"></img>
+			<a href="#" th:href="@{'/salons/' + ${salon.licNum}}" th:text="${salon.name}"></a>
+<!-- 			<p th:text="${salon.services}"></p> -->
+		</div>
+	</main>
+	<footer>
+		<p>Created for internal training at Xpanxion</p>
+	</footer>
+</body>
+</html>

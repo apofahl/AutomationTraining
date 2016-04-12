@@ -13,17 +13,18 @@
 				<li id="home" class="tab"><a href="#" th:href="@{/}">Home</a></li>
 				<li id="stylists" class="tab"><a href="">Stylists</a></li>
 				<li id="salons" class="tab"><a href="">Salons</a></li>
+				<li id="signIn" class="tab"><a href="#" th:href="@{/logout}">Sign Out</a></li>
 			</ul>
 		</nav>
 	</header>
 	<main>
 		<div>
-			<h2 th:text="${salon.name}"></h2>
+			<p th:text="${salon.name}"></p>
 			<h4 th:text="'Phone: '+ ${salon.phone}"></h4>
 			<p th:text="'Address: '+ ${salon.street} +' '+ ${salon.city} +', '+ ${salon.state} +' '+ ${salon.zip}"></p>
 		</div>
 		<div th:each="stylist : ${salon.stylists}">
-			<h3 th:text="${stylist.firstName} +' '+ ${stylist.lastName}"></h3>
+			<a href="#" th:href="@{'/stylists/' + ${stylist.licNum}}" th:text="${stylist.firstName} +' '+ ${stylist.lastName}"></a>
 		</div>
 		<div th:each="service : ${serviceList}">
 			<p th:text="${service.description}"></p>

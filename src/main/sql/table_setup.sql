@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS APP_STYLIST (
 	Stylist_FName VARCHAR(20) NOT NULL,
 	Stylist_LName VARCHAR(20) NOT NULL,
 	Stylist_Phone VARCHAR(15),
+	Stylist_Zip VARCHAR(20),
 	Stylist_Email VARCHAR(50) NOT NULL,
     Stylist_About VARCHAR(350),
 	Cash_Only BOOLEAN,
@@ -33,12 +34,12 @@ CREATE TABLE IF NOT EXISTS APP_STYLIST (
 PRIMARY KEY (Stylist_LicNum),
 FOREIGN KEY (Salon_ID) REFERENCES APP_SALON(Salon_LicNum) ON UPDATE CASCADE);
 
-INSERT INTO APP_STYLIST (Stylist_LicNum, Stylist_FName, Stylist_LName, Stylist_Email) VALUES 
-("140234", "Hannah", "Smith", "hannah_joy@gmail.com");
+INSERT INTO APP_STYLIST (Stylist_LicNum, Stylist_FName, Stylist_LName, Stylist_Email, Stylist_Zipcode) VALUES 
+("140234", "Hannah", "Smith", "hannah_joy@gmail.com", 68845);
 INSERT INTO APP_STYLIST (Stylist_LicNum, Stylist_FName, Stylist_LName, Stylist_Email, Stylist_About, Salon_ID) VALUES 
 ("120938", "Jamie", "Johnson", "jjohnson@yahoo.com", "The name is Jamie, hair is the game. I've been loving the life of a stylist for 7 years now with many more to come. If you are looking for someone with experience look no further.", "205K03PK");
-INSERT INTO APP_STYLIST (Stylist_LicNum, Stylist_FName, Stylist_LName, Stylist_Email, Stylist_About) VALUES 
-("103948", "Sam", "Thompson", "sam.thompson@gmail.com", "I'm Sam and loving life fresh out of school! I have a passion for beautiful hair and enjoy trying new styles. I am still searching for a home salon, but I am cheaper without one. Book while you can!");
+INSERT INTO APP_STYLIST (Stylist_LicNum, Stylist_FName, Stylist_LName, Stylist_Email, Stylist_Zipcode, Stylist_About) VALUES 
+("103948", "Sam", "Thompson", "sam.thompson@gmail.com", 68502, "I'm Sam and loving life fresh out of school! I have a passion for beautiful hair and enjoy trying new styles. I am still searching for a home salon, but I am cheaper without one. Book while you can!");
 INSERT INTO APP_STYLIST (Stylist_LicNum, Stylist_FName, Stylist_LName, Stylist_Phone, Stylist_Email, Salon_ID) VALUES
 ("109283", "Hannah", "Smith", "3084402905", "smith_girly@hotmail.com", "73C6204JW"), 
 ("130941", "Feliz", "Brown", "3084402907", "brownfc@lopers.unk.edu", "09F436DS");

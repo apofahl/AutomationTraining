@@ -30,7 +30,7 @@ public class Review implements Serializable{
 	@Column(name= "Review_Date", nullable = false)
 	private Date date;
 	@Column(name= "Review_Rate", nullable = false)
-	private double review;
+	private double rating;
 	@Column(name= "Review_Note")
 	private String note;
 	
@@ -66,12 +66,12 @@ public class Review implements Serializable{
 		this.date = date;
 	}
 	
-	public double getReview() {
-		return review;
+	public double getRating() {
+		return rating;
 	}
 	
-	public void setReview(double review) {
-		this.review = review;
+	public void setRating(double rating) {
+		this.rating = rating;
 	}
 	
 	public String getNote() {

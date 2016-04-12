@@ -13,25 +13,21 @@
 				<li id="home" class="tab"><a href="#" th:href="@{/}">Home</a></li>
 				<li id="stylists" class="tab"><a href="">Stylists</a></li>
 				<li id="salons" class="tab"><a href="">Salons</a></li>
-				<li id="signIn" class="tab"><a href="">Sign In/Join</a></li>
 			</ul>
 		</nav>
 	</header>
 	<main>
-		<div th:each="stylist : ${stylistList}">
-			<img src="../images/MK3_9926.jpg" th:src="@{/images/MK3_9926.jpg}"></img>
-			<p th:text="${stylist.firstName} +' '+ ${stylist.lastName}" th:onclick="'alert(\'' + ${stylist.firstName} + '\');'"></p>
-			<p th:text="${stylist.email}"></p>
-			<div th:switch="${stylist.salon}">
-				<p th:case="null"></p>
-				<p th:case="*" th:text="${stylist.salon.name}"></p>
-			</div>
-		</div>
-		<div th:each="salon : ${salonList}">
-			<img src="../images/MK3_9926.jpg"></img>
-			<p th:text="${salon.name}"></p>
-<!-- 			<p th:text="${salon.services}"></p> -->
-		</div>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+		<form th:action="@{/login}" method="post">
+            <div><label> User Name <input type="text" name="username" required="true" autofocus="true"/> </label></div>
+            <div><label> Password <input type="password" name="password" required="true"/> </label></div>
+            <div><input type="submit" value="Sign In"/></div>
+        </form>
 	</main>
 	<footer>
 		<p>Created for internal training at Xpanxion</p>

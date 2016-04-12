@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,8 +29,9 @@ public class Client implements Serializable{
 	private String email;
 	@Column(name= "Client_Zip")
 	private String zip;
-	@Column(name= "Stylist_ID")
-	private String stylistId;
+	@ManyToOne(optional=true)
+    @JoinColumn(name="Stylist_ID",referencedColumnName="Stylist_LicNum")
+	private Stylist stylist;
 	
 	public long getId() {
 		return id;
@@ -78,11 +81,11 @@ public class Client implements Serializable{
 		this.zip = zip;
 	}
 	
-	public String getStylistId() {
-		return stylistId;
+	public Stylist getStylist() {
+		return stylist;
 	}
 	
-	public void setStylistId(String stylistId) {
-		this.stylistId = stylistId;
+	public void setStylistId(Stylist stylist) {
+		this.stylist = stylist;
 	}
 }

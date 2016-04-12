@@ -28,8 +28,10 @@ public class Stylist implements Serializable{
 	private String lastName;
 	@Column(name= "Stylist_Phone")
 	private String phone;
-	@Column(name= "Stylist_Email")
+	@Column(name= "Stylist_Email", nullable = false)
 	private String email;
+	@Column(name= "Stylist_Zip")
+	private String zip;
 	@Column(name= "Stylist_About")
 	private String about;
 	@Column(name= "Cash_Only")
@@ -80,6 +82,14 @@ public class Stylist implements Serializable{
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getZip() {
+		return zip;
+	}
+	
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
 	
 	public String getAbout() {

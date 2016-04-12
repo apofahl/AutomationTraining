@@ -13,6 +13,7 @@
 				<li id="home" class="tab"><a href="#" th:href="@{/}">Home</a></li>
 				<li id="stylists" class="tab"><a href="">Stylists</a></li>
 				<li id="salons" class="tab"><a href="">Salons</a></li>
+				<li id="signIn" class="tab"><a href="#" th:href="@{/logout}">Sign Out</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -24,7 +25,7 @@
 		</div>
 		<div th:switch="${stylist.salon}">
 			<p th:case="null"></p>
-			<p th:case="*" th:text="${stylist.salon.name}"></p>
+			<a th:case="*" href="#" th:href="@{'/salons/' + ${stylist.salon.licNum}}" th:text="${stylist.salon.name}"></a>
 		</div>
 		<table>
 		    <thead>
@@ -43,8 +44,8 @@
 		    </tbody>
 	    </table>
 	    
-	    <div th:each="review : ${reviewList}">
-	    	<h3 th:text="${review.review}"></h3>
+	    <div th:each="review : ${stylist.reviews}">
+	    	<h3 th:text="${review.rating}"></h3>
 	    	<h5 th:text="${review.date}"></h5>
 			<div th:switch="${review.note}">
 				<p th:case="null"></p>
