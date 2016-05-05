@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+
 @Entity
 @Table(name = "APP_USERROLE")
-public class Role implements Serializable{
+public class Role implements Serializable, GrantedAuthority {
 	
     /** Distinguish between different versions of this serialized class. */
     private static final long serialVersionUID = 1L;
@@ -34,5 +36,10 @@ public class Role implements Serializable{
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String getAuthority() {
+		return getDescription();
 	}
 }

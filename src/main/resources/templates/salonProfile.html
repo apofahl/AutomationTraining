@@ -11,8 +11,8 @@
 		<nav>
 			<ul>
 				<li id="home" class="tab"><a href="#" th:href="@{/}">Home</a></li>
-				<li id="stylists" class="tab"><a href="">Stylists</a></li>
-				<li id="salons" class="tab"><a href="">Salons</a></li>
+				<li id="stylists" class="tab"><a href="#" th:href="@{/stylists}">Stylists</a></li>
+				<li id="salons" class="tab"><a href="#" th:href="@{/salons}">Salons</a></li>
 				<li id="signIn" class="tab"><a href="#" th:href="@{/logout}">Sign Out</a></li>
 			</ul>
 		</nav>
@@ -21,6 +21,7 @@
 		<div>
 			<p th:text="${salon.name}"></p>
 			<h4 th:text="'Phone: '+ ${salon.phone}"></h4>
+			<!-- Lots of nulls in addresses to address -->
 			<p th:text="'Address: '+ ${salon.street} +' '+ ${salon.city} +', '+ ${salon.state} +' '+ ${salon.zip}"></p>
 		</div>
 		<div th:each="stylist : ${salon.stylists}">

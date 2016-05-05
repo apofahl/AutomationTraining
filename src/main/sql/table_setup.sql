@@ -169,4 +169,46 @@ INSERT INTO APP_SALE (Start_Date, End_Date, Description, Salon_ID) VALUES
 ('2015-11-12', '2015-11-17', "10% Off All Product", "09F436DS"),
 ('2015-10-15', '2015-11-15', "Book Now For 20% Off", "L67D459F");
 
+CREATE TABLE IF NOT EXISTS APP_USERROLE (
+	Role_ID INT(11) NOT NULL AUTO_INCREMENT,
+	Description VARCHAR(20) NOT NULL,
+PRIMARY KEY (Role_ID));
+
+INSERT INTO APP_USERROLE (Description) VALUES 
+("Client"),
+("Stylist"),
+("Salon"),
+("Admin"),
+("Developer");
+
+CREATE TABLE IF NOT EXISTS APP_USER (
+	User_ID INT(11) NOT NULL AUTO_INCREMENT,
+	User_Role INT(11) NOT NULL,
+    Email VARCHAR(20),
+    Password VARCHAR(88),
+    Client_ID INT(11),
+    Stylist_ID VARCHAR(15),
+    Salon_ID VARCHAR(15),
+PRIMARY KEY (User_ID),
+FOREIGN KEY (User_Role) REFERENCES APP_USERROLE(Role_ID) ON UPDATE CASCADE,
+FOREIGN KEY (Client_ID) REFERENCES APP_CLIENT(Client_ID) ON UPDATE CASCADE,
+FOREIGN KEY (Stylist_ID) REFERENCES APP_STYLIST(Stylist_LicNum) ON UPDATE CASCADE,
+FOREIGN KEY (Salon_ID) REFERENCES APP_SALON(Salon_LicNum) ON UPDATE CASCADE);
+
+INSERT INTO APP_USER (User_Role, Password, Client_ID) VALUES 
+(1, 'admin', 2),
+(1, 'admin', 3);
+
+INSERT INTO APP_USER (User_Role, Password, Stylist_ID) VALUES 
+(2, 'admin', '130941');
+
+INSERT INTO APP_USER (User_Role, Password, Salon_ID) VALUES 
+(3, 'admin', '205K03PK');
+
+INSERT INTO APP_USER (User_Role, Email, Password) VALUES 
+(4, 'a@a.com', 'admin');
+
+INSERT INTO APP_USER (User_Role, Email, Password) VALUES 
+(5, 'd@d.com', 'admin');
+
 	

@@ -3,20 +3,16 @@ package com.xpanxion.automation.dummyapp.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.xpanxion.automation.dummyapp.model.Review;
 import com.xpanxion.automation.dummyapp.model.Salon;
 import com.xpanxion.automation.dummyapp.model.Service;
 import com.xpanxion.automation.dummyapp.model.ServiceType;
 import com.xpanxion.automation.dummyapp.model.Stylist;
 import com.xpanxion.automation.dummyapp.repository.SalonRepository;
-import com.xpanxion.automation.dummyapp.repository.ServiceTypeRepository;
 import com.xpanxion.automation.dummyapp.repository.StylistRepository;
 
 @Controller
@@ -24,8 +20,6 @@ public class ClientController {
 	
 	@Autowired
 	private StylistRepository stylistRepo;
-	@Autowired
-	private ServiceTypeRepository serviceTypeRepo;
 	@Autowired
 	private SalonRepository salonRepo;
 
@@ -36,7 +30,7 @@ public class ClientController {
     
     @RequestMapping("/logout")
     public String logout(Model model) {
-        return "home";
+        return "logout";
     }
     
     @RequestMapping("/")
@@ -51,7 +45,6 @@ public class ClientController {
     @RequestMapping("/salons/{salonId}")
     public String salonProfile(@PathVariable String salonId, Model model) {
     	Salon salon = salonRepo.findByLicNum(salonId);
-    	List<Stylist> list = salon.getStylists();
     	List<ServiceType> serviceList = salonRepo.findServiceTypesBySalon(salon);
     	model.addAttribute("salon", salon);
     	model.addAttribute("serviceList", serviceList);
@@ -60,14 +53,25 @@ public class ClientController {
     
     @RequestMapping("/stylists/{stylistId}")
     public String stylistProfile(@PathVariable String stylistId, Model model) {
-//    	Stylist stylist = stylistRepo.findByLicNum("120938");
     	Stylist stylist = stylistRepo.findByLicNum(stylistId);
     	List<Service> serviceList = stylistRepo.findServices(stylist);
-    	List<Review> reviewList = stylist.getReviews();
     	model.addAttribute("stylist", stylist);
     	model.addAttribute("serviceList", serviceList);
-//    	model.addAttribute("reviewList", reviewList);
         return "stylistProfile";
+    }
+    
+    @RequestMapping("/stylists")
+    public String stylists(Model model) {
+    	List<Stylist> stylistList = stylistRepo.findAll();
+    	model.addAttribute("stylistList", stylistList);
+        return "stylists";
+    }
+    
+    @RequestMapping("/salons")
+    public String salons(Model model) {
+    	List<Salon> salonList = salonRepo.findAll();
+    	model.addAttribute("salonList", salonList);
+        return "salons";
     }
 	
 	@RequestMapping("/search")

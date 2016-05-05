@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>StyleFinder : Login</title>
+    <title>StyleFinder : Stylists</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" media="all" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
 </head>
@@ -13,21 +13,22 @@
 				<li id="home" class="tab"><a href="#" th:href="@{/}">Home</a></li>
 				<li id="stylists" class="tab"><a href="#" th:href="@{/stylists}">Stylists</a></li>
 				<li id="salons" class="tab"><a href="#" th:href="@{/salons}">Salons</a></li>
+				<li id="signOut" class="tab"><a href="#" th:href="@{/logout}">Sign Out</a></li>
 			</ul>
 		</nav>
 	</header>
 	<main>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-		<form th:action="@{/login}" method="post">
-            <div><label> User Name <input type="text" name="username" required="true" autofocus="true"/> </label></div>
-            <div><label> Password <input type="password" name="password" required="true"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
+		<div th:each="stylist : ${stylistList}">
+			<img th:src="@{/images/example.jpg}"></img>
+			<a href="#" th:href="@{'/stylists/' + ${stylist.licNum}}" th:text="${stylist.firstName} +' '+ ${stylist.lastName}"></a>
+			<div th:switch="${stylist.zip != null}">
+				<p th:case="true" th:text="${stylist.zip}"></p>
+				<p th:case="false" th:text="${stylist.salon.zip}"></p>
+			</div>
+			<div th:if="${stylist.salon != null}">
+				<p th:text="${stylist.salon.name}"></p>
+			</div>
+		</div>
 	</main>
 	<footer>
 		<p>Created for internal training at Xpanxion</p>

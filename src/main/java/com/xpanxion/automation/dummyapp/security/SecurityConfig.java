@@ -1,35 +1,32 @@
 package com.xpanxion.automation.dummyapp.security;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.xpanxion.automation.dummyapp.service.UserDetailService;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private DataSource datasource;
+    @Autowired
+    private UserDetailService userDetailService;
+    
+    @Autowired
+    private SuccessHandler successHandler;
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
 //                .antMatchers("/", "/stylists", "/salons").permitAll()
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/static/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .authorizeRequests()
@@ -37,28 +34,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/login")
+                .loginPage("/login").successHandler(successHandler)
                 .permitAll()
                 .and()
-            .logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout")
+            .logout()
+	            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//	            .logoutSuccessUrl("/logout")
                 .permitAll();
     }
 	
 	@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        JdbcUserDetailsManager userDetailsService = new JdbcUserDetailsManager();
-        userDetailsService.setDataSource(datasource);
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        
-        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
-        auth.jdbcAuthentication().dataSource(datasource);
- 
-        if(!userDetailsService.userExists("user")) {
-            List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-            authorities.add(new SimpleGrantedAuthority("USER"));
-           User userDetails = new User("user", encoder.encode("password"), authorities);
- 
-            userDetailsService.createUser(userDetails);
-        }
+		auth
+			.userDetailsService(userDetailService);
     }
 }
